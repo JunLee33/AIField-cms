@@ -1,0 +1,151 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>| 현장 관리</h2>
+			</div>
+			<div class="page_header user" style="height: 90px;">
+				
+				<!-- <div style="text-align: center;">	 -->
+				<div>	
+					<fieldset style="margin-bottom: 10px;">
+						<h4 style="display: inline-block;  min-width: 70px; text-align: center;">검색조건</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <select name="selSearchType" id="schType" style="width: 15%;">
+                <option value="workspace_nm">현장명</option>
+                <!-- <option value="workspace_id">아이디</option> -->
+                <!-- <option value="workspace_location">등급</option> -->
+              </select>
+              <input type="text" style="width: 80%;" name="searchText" id="schTxt" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+            </div>
+            <button type="button" class="btn_search" id="btnSearch" title='검색'>검색</button>
+					</fieldset>
+          <fieldset>
+						<h4 style="display: inline-block; min-width: 70px; text-align: center;">등록일</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <input type="text" name="search_start" id="search_start" class="input_data big" placeholder="시작날짜" style="width:25%; margin-right:4%;" readonly="true;"> ~
+              <input type="text" name="search_end" id="search_end" class="input_data big" placeholder="끝 날짜" style="width:25%; margin-left:4%; margin-right:4%;" readonly="true;">
+            </div>
+						<button type="button" class="btn_refresh" id="btnRefresh" title='초기화'>초기화</button>
+					</fieldset>
+				</div>
+			</div>
+      
+      <!--LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;">
+        <table id="workspace_list" class="table responsive table-bordered table-striped"  width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;">선택</th>
+              <th style="padding-right:0px;">현장번호</th>
+              <th style="padding-right:0px;">현장명</th>
+              <th style="padding-right:0px;">설명</th>
+              <th style="padding-right:0px;">주소</th>
+              <th style="padding-right:0px;">등록일</th>
+              <th style="padding-right:0px;">관리</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div style="width: 100%; margin-right: 10px; position: relative; top: -40px; padding-left: 15px; padding-right: 15px;">
+        <button type="button" style="float: left;" class="btn_point_delete" data-toggle="modal" id="btnDeletebtn" onclick='delete_seleted()' title='선택 삭제'>선택 삭제</button>
+        <button type="button" style="float: right;" class="btn_point_add" data-toggle="modal" id="btnInsertOpen" title='현장 등록'>현장 등록</button>
+      </div>					
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+	
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+
+<div class="modal fade modal-center" data-backdrop="static" id="modalInsert">
+    <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+        <div class="modal-content modal-20size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">현장 등록</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="formWorkspace" name="formWorkspace">
+                    <div class="box-body" style="padding : 10px">
+                     
+                      <div style="width: 100%;">
+                        <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                          <label for="workspace_id">현장 번호</label>
+                          <input type="text" class="form-control" name = "workspace_id"  id="workspace_id" disabled placeholder="자동으로 생성됩니다">
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                      
+                        <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                          <label for="create_date" class="col-md-6">등록일</label>
+                          <input type="text" class="form-control" name = "create_date"  id="create_date" disabled placeholder="자동으로 생성됩니다">
+                          <span class="glyphicon glyphicon-tag form-control-feedback"></span>
+                        </div>
+                      </div>
+                      
+                      <div style="width: 100%;">
+                        <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                          <label for="workspace_nm">현장명 *</label>
+                          <input type="text" class="form-control" name = "workspace_nm"  id="workspace_nm" placeholder="현장명을 입력해주세요">
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                          <label for="user_id" class="col-md-6">등록자</label>
+                          <input type="text" class="form-control" name = "user_id"  id="user_id" readonly value={{ current_user.user_id }} placeholder="자동으로 생성됩니다">
+                          <span class="glyphicon glyphicon-tag form-control-feedback"></span>
+                        </div>
+                      </div>
+               
+
+                        <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                          <label for="workspace_cmt">현장 설명</label>
+                          <input type="text" class="form-control" name = "workspace_cmt"  id="workspace_cmt" placeholder="현장 설명을 입력해주세요">
+                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                          <label for="workspace_location">주소 *</label>
+                          <input type="text" class="form-control" name = "workspace_location"  id="workspace_location" placeholder="현장 주소를 입력해주세요">
+                          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                          <label for="workspace_memo">메모</label>
+                          <input type="text" class="form-control" name = "workspace_memo"  id="workspace_memo" placeholder="메모">
+                          <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn_point" id="btnRegister" title='등록'>등록</button>
+                <button type="button" class="btn btn_point" id="btnUpdate" title='수정'>수정</button>
+                <button type="button" class="btn btn_default pull-left" id="btnDelete" title='삭제'>삭제</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- //page script 끝 -->	
+
+<!-- page script -->
+<script src="/static/js/did/workspace.js"></script>
+
+</body>
+</html>

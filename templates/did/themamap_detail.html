@@ -1,0 +1,93 @@
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>| 주제도 상세  -  <span id="subtitle"></span></h2>
+			</div>
+
+      <!-- 상세보기 시작 -->
+
+      <div class="box-body" style="overflow: hidden; height: 800px;" id="content_detail">
+        <div id="map" style="width: 100%; height: 450px;"></div>
+  
+        <div id="map_setting_area" style="width: 140px;height: 100px;position: absolute;top: 80px;z-index: 1000;right: 0;">
+          <div style="color: #85c300; padding: 8px; border: 1px solid #85c300; height: 30px; background-color: #fff; width: 120px;">
+            <input type="checkbox" checked id="remove_layer" name="remove_layer" style="opacity: 1; display: inline-block; position: relative; z-index: 1; margin: 0;">
+            <label for="remove_layer" style="padding-left : 16px">결과파일</label>
+          </div>
+          <select style="color: #85c300; padding: 8px; border: 1px solid #85c300; background-color: #fff; width: 120px;" id="cont_list">
+          </select>
+        </div>
+        
+        <table id="content_detail_tbl" class="table responsive table-bordered table-striped"  style="margin-top: 10px;" width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;" colspan = "4"> 세부내용</th>
+            </tr>
+          </thead>
+          <form style="height: fit-content;" id="formContentsDetail" name="formContentsDetail">
+
+          <tbody>
+            <tr>
+              <td style="padding-right:0px; text-align: center; font-weight: bold;">주제도 번호</td>
+              <td style="padding-right:0px; text-align: center;"><span id="themamap_id"></span><input type="hidden"  name="themamap_id" id="themamap_id1" readonly></td>
+              <td style="padding-right:0px; text-align: center; font-weight: bold;">등록일</td>
+              <td style="padding-right:0px; text-align: center;"><span id="themamap_creat_date"></span></td>
+              <td style="padding-right:0px; text-align: center; font-weight: bold;">등록자</td>
+              <td style="padding-right:0px; text-align: center;"><span id="themamap_user_id"></span></td>
+            </tr>
+            <tr>
+              <td style="padding-right:0px; text-align: center; font-weight: bold;">제목</td>
+              <td style="padding-right:0px;" colspan = "5"><input type="text" style="width: 90%; padding: 10px;" name="themamap_nm" id="themamap_name"></td>
+            </tr>
+            <tr>
+              <td style="padding-right:0px; text-align: center; font-weight: bold;">비교목록</td>
+              <td style="padding-right:0px;" colspan = "5">
+                <div class="box-body" style="overflow: hidden;" id="themamap_list_div">
+                  <table id="themamap_list" class="table responsive table-bordered table-striped"  width="100%">
+                    <thead>
+                      <tr>
+                        <th style="padding-right:0px;">영상번호</th>
+                        <th style="padding-right:0px;">제목</th>
+                        <th style="padding-right:0px;">촬영일</th>
+                        <th style="padding-right:0px;">용량</th>
+                        <th style="padding-right:0px;">등록일</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          </form>
+
+        </table>
+        <div style="width: 100%; margin-right: 10px; margin-top: 10px; position: relative; padding-left: 15px; padding-right: 15px;" id="tbl_bottom_btn">
+          <button type="button" style="float: left;" class="btn_point_delete" data-toggle="modal" id="btndelete_tbl" title='삭제'>삭제</button>
+          <button type="button" style="float: right;" class="btn_point_add" data-toggle="modal" id="btnupdate_tbl" title='현장 등록'>수정</button>
+        </div>
+      </div>
+
+      
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+<!-- page script -->
+<!-- <script src="/static/js/leaflet-mapbox-gl.js"></script> -->
+<script src="/static/js/L.TileLayer.BetterWMS.js"></script>
+<script src="/static/js/did/themamap_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+config/configuration.py
+config/dev_path.ini
+config/local_path.ini
+config/prod_path.ini
+config/properties.py
+config/stag_path.ini
+resource/payment.py
+static/js/did/paymodule.js

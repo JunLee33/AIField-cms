@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,  user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>AI-Fields -  Login</title>
+
+ <!-- Bootstrap 3.3.7 -->
+ <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
+ <!-- Ionicons -->
+ <link rel="stylesheet" href="/static/bower_components/Ionicons/css/ionicons.min.css">
+ <!-- DataTables -->
+ <link rel="stylesheet" href="/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.css">
+
+ <!-- daterange picker -->
+ <link rel="stylesheet" href="/static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+ <!-- iCheck for checkboxes and radio inputs -->
+ <link rel="stylesheet" href="/static/plugins/iCheck/all.css">
+
+ <!-- Select2 -->
+ <link rel="stylesheet" href="/static/bower_components/select2/dist/css/select2.min.css">
+
+ <!-- bootstrap datepicker -->
+ <link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+ <!-- Bootstrap time Picker -->
+ <link rel="stylesheet" href="/static/plugins/timepicker/bootstrap-timepicker.min.css">
+
+ <!-- Theme style -->
+ <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
+ <!-- AdminLTE Skins. Choose a skin from the css/skins
+	  folder instead of downloading all of them to reduce the load. -->
+ <link rel="stylesheet" href="/static/dist/css/skins/_all-skins.min.css">
+
+ <!-- jQuery 3 -->
+ <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+ <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+ <script src="/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+ <!-- jquery ui -->
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <!-- Bootstrap 3.3.7 -->
+ <script src="/static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+ <!-- FastClick -->
+ <script src="/static/bower_components/fastclick/lib/fastclick.js"></script>
+ <!-- AdminLTE App -->
+ <script src="/static/dist/js/adminlte.min.js"></script>
+ <!-- AdminLTE for demo purposes -->
+ <script src="/static/dist/js/demo.js"></script>
+
+ <!-- Select2 -->
+ <script src="/static/bower_components/select2/dist/js/select2.full.min.js"></script>
+ <!-- InputMask -->
+ <script src="/static/plugins/input-mask/jquery.inputmask.js"></script>
+ <script src="/static/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+ <script src="/static/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+ <!-- date-range-picker -->
+ <script src="/static/bower_components/moment/min/moment.min.js"></script>
+ <script src="/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+ <!-- bootstrap datepicker -->
+ <script src="/static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+ <script src="/static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
+  <!--bootstrap datetimepicker CDN-->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+ <!-- bootstrap color picker -->
+ <script src="/static/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+ <!-- bootstrap time picker -->
+ <script src="/static/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+ <!-- SlimScroll -->
+ <script src="/static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+ <!-- iCheck 1.0.1 -->
+ <script src="/static/plugins/iCheck/icheck.min.js"></script>
+
+  <!--Video JS CDN-->
+ <!-- <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
+ <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script> -->
+
+ <!-- slick -->
+
+ <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+ <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+ 
+ <!-- datatable button -->
+
+ <!-- <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script> -->
+ <!-- <script src="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"></script> -->
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+ <!-- datatable select -->
+ <!-- <script src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js"></script>
+ <script src="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css"></script> -->
+
+ <!-- datatables checkbox -->
+ <link type="text/css" href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+ <script type="text/javascript" src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+
+ <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.11.3/sorting/natural.js"></script>
+
+ <!-- file download-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fileDownload/1.4.2/jquery.fileDownload.min.js"></script>
+
+ <!-- Google Font -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+ <!--did css 공통-->
+ <link rel="stylesheet" href="/static/css/default.css">
+
+ <script src="/static/js/common/common.js"></script>
+ <script src="/static/js/common/calendar.js"></script>
+
+
+<!-- 공통 링크 시작 -->
+<link rel="stylesheet" href="/static/css/reset.css">
+<link rel="stylesheet" href="/static/css/common.css">
+<link rel="stylesheet" href="/static/css/contents.css">
+
+
+</head>
+<body class="login">
+<form method="post" action="" id="frmLogin">
+  <!-- wrap 시작 -->
+  <div id="login_wrap">
+    <fieldset>
+      <legend>로그인</legend>   
+      <h1 class="login_text">Login</h1>
+      <div class="login_row">
+        <input type="text" name="user_id"  id="user_id" class="id" placeholder="아이디" onkeypress="if(event.keyCode == 13) $('#loginbtn').click();">
+      </div>
+      <div class="login_row">
+        <input type="password" name="user_pwd" id="user_pwd" class="pw" placeholder="패스워드" onkeypress="if(event.keyCode == 13) $('#loginbtn').click();">
+      </div>		
+      <div class="login_save">
+        <!-- <input type="checkbox" id="chk_id"><label for="chk_id" class="lb_check">아이디 저장</label> -->
+        <!-- <a href="#none" target="_blank" onclick="javascript:openPopup(this.href, 'popup', '800', '600');return false;">비밀번호 찾기</a> -->
+        <a onclick="$('#modalPwFind').modal('show');" data-toggle = "modal">비밀번호 재설정</a>
+      </div>
+      <!-- <button type="submit" class="btn_login">로그인</button>		 -->
+      <button type="button" class="btn_login" onClick="login();" id='loginbtn' title='로그인하기'>로그인</button>	
+      <!-- <button type="button" class="btn_login" onClick="welcome_emailsend('dlwns0330@naver.com');" title='로그인하기'>로그인</button>	 -->
+      <div style="text-align: center; margin-top: 10px;">
+        <button type="button" style="background-color: white; color: black;" onclick="$('#addmodalInsert').modal('show');"><u>회원가입</u></a>
+      </div>
+      <!-- <p class="login_copyright">AI-Fields</p> -->
+      <div style="height: 100px;text-align: center; margin-top: 50px;">
+        <img src="/static/images/teixon_logo.svg" style="object-fit: contain;width: 150px;">
+      </div>
+    </fieldset>
+
+    
+  </div> 
+  <!-- //wrap 끝 -->
+</form>
+
+<footer id="footer">
+  <div class="footer_inner" style="text-align: center;">
+      <div class="footer_addr">㈜테이슨 | 02-468-1197 | support@teixon.com | 사업자번호 1108604781 <span class="mob_inline"></span></div>
+      <div class="footer_addr">#402, 14, Seongsui-ro 10-gil, Seongdong-gu, Seoul Korea<span class="mob_inline"></span></div>
+      <div class="footer_menu">
+          <button type="button" id="" onclick="$('#footer_modal1').modal('show');">이용약관</button>
+          <button type="button" id="" onclick="$('#footer_modal2').modal('show');">AI Fields 서비스약관</button>
+          <button type="button" id="" onclick="$('#footer_modal3').modal('show');">개인정보처리방침</button>
+      </div>
+      <p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+  </div>		
+</footer>
+
+<!-- 비밀번호 재설정-1 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalPwFind" style="display: none;">
+    <div class="modal-dialog modal-20size modal-center" style="width:20%">
+        <div class="modal-content modal-20size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose1" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">비밀번호 재설정</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="formUser" name="formUser">
+                    <div class="box-body" id="resetPw" style="padding : 10px">
+
+                      <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                        <label for="user_id" style="padding : 10px 10px 0 0">사용자 아이디</label>
+                        <input type="text" class="form-control" name = "user_id"  id="user_id_verify" placeholder="사용자 ID를 입력하세요">
+                        <span class="glyphicon glyphicon-tag form-control-feedback" style="top : 25px !important"></span>
+                      </div>
+
+                      <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                        <label for="user_nm" style="padding : 10px 10px 0 0">사용자 이름</label>
+                        <input type="text" class="form-control" name = "user_nm"  id="user_nm_verify" placeholder="사용자 이름을 입력 하세요">
+                        <span class="glyphicon glyphicon-user form-control-feedback" style="top : 25px !important"></span>
+                      </div>
+
+                      <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                        <label for="user_phone" style="padding : 10px 10px 0 0">핸드폰 번호</label>
+                        <input type="text" class="form-control" name = "user_phone"  id="user_phone_verify" placeholder="핸드폰 번호를 입력해주세요">
+                        <span class="glyphicon glyphicon-briefcase form-control-feedback" style="top : 25px !important"></span>
+                      </div>
+                    </div>
+                    <!-- /.box-footer -->
+                    <!-- <input type="hidden" id="user_id_set" name="user_id_set"> -->
+                </form>
+
+            </div>
+            <div class="modal-footer" id="button_set">
+                <button type="button" data-toggle="modal" data-target="#modalPwReset" class="btn btn_default" id="btnNextStep" style="visibility:hidden"></button>
+                <button type="button" class="btn btn_point" id="btnVerify" title='정보 인증'>인증</button>
+                <!-- data-toggle="modal" data-target="#modalPwReset"-->
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- 비밀번호 재설정-2 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalPwReset" style="display: none;">
+    <div class="modal-dialog modal-20size modal-center" style="width:20%">
+        <div class="modal-content modal-20size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose2" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">비밀번호 재설정</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="formPwReset" name="formPwReset">
+                    <div class="box-body" id="resetPw" style="padding : 10px">
+                        <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                          <label style="padding : 10px 10px 0 0">비밀번호</label>
+                          <input type="password" class="form-control" name = "user_new_pwd"  id="user_new_pwd" placeholder="(숫자,영문,특문)포함 8자 이상">
+                          <span class="glyphicon glyphicon-lock form-control-feedback" style="top : 25px !important"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                          <label style="padding : 10px 10px 0 0">비밀번호 확인</label>
+                          <input type="password" class="form-control" name = "user_conf_pwd"  id="user_conf_pwd" placeholder="비밀번호를 다시 입력하세요">
+                          <span class="glyphicon glyphicon-log-in form-control-feedback" style="top : 25px !important"></span>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                    <input type="hidden" id="user_id_set" name="user_id_set">
+                </form>
+
+            </div>
+            <div class="modal-footer" id="button_set">
+                <button type="button" class="btn btn_point" id="btnReset" title='비밀번호 재설정'>재설정</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- 회원가입 -->
+<div class="modal fade modal-center" data-backdrop="static" id="addmodalInsert">
+  <div class="modal-dialog modal-30size modal-center" style="top:0%;">
+      <div class="modal-content modal-30size">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="addbtnClose" title='닫기'
+                      onclick="closePopup();">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="addmodalTitle">사용자 등록</h4>
+          </div>
+          <div class="modal-body">
+
+              
+            <form class="form-horizontal" id="addformUser" name="addformUser">
+              <div class="box-body" style="padding : 10px">
+               
+                <div style="width: 100%;">
+                  <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="user_nm">이름 *</label>
+                    <input type="text" class="form-control" name = "user_nm"  id="adduser_nm" placeholder="이름을 입력해주세요">
+                    <span class="glyphicon glyphicon-user form-control-feedback" ></span>
+                  </div>
+                
+                  <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="adduser_id" class="col-md-6">아이디 *</label>
+                    <button type="button" class="btn_point col-md-6" style=" margin-bottom: 5px; float:right;" id="addduplicate_check" checking="N" title='아이디 중복체크'>중복체크</button>
+                    <input type="text" class="form-control" name = "user_id"  id="adduser_id" placeholder="이메일을 입력해주세요">
+                    <span class="glyphicon glyphicon-tag form-control-feedback" ></span>
+                  </div>
+                </div>
+                
+                <div style="width: 100%;">
+                  <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="user_pwd">비밀번호 *</label>
+                    <input type="password" class="form-control" name = "user_pwd"  id="adduser_pwd" placeholder="(숫자,영문,특문)포함 8자 이상">
+                    <span class="glyphicon glyphicon-lock form-control-feedback" ></span>
+                  </div>
+
+                  <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="user_conf_pwd">비밀번호 확인 *</label>
+                    <input type="password" class="form-control" name = "user_conf_pwd"  id="adduser_conf_pwd" placeholder="비밀번호를 다시 입력하세요">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback" ></span>
+                  </div>
+                </div>
+
+                <div style="width: 100%;">
+                  <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="adduser_phone">핸드폰 번호 *</label>
+                    <input type="text" class="form-control" name = "user_phone"  id="adduser_phone" placeholder="핸드폰 번호를 입력해주세요">
+                    <span class="glyphicon glyphicon-user form-control-feedback" ></span>
+                  </div>
+                
+                  <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                    <label for="user_birth" class="col-md-6">생년월일 *</label>
+                    <input type="text" name="user_birth" id="adduser_birth" class="form-control" placeholder="생년월일" readonly="true;">
+                    <span class="glyphicon glyphicon-tag form-control-feedback" ></span>
+                  </div>
+                </div>
+         
+                  <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                    <label for="user_office">사용자 소속회사명</label>
+                    <input type="text" class="form-control" name = "user_office"  id="adduser_office" placeholder="사용자 소속 회사명을 입력해주세요(선택)">
+                    <span class="glyphicon glyphicon-lock form-control-feedback" ></span>
+                  </div>
+
+                  <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                    <label for="user_dept_nm">사용자 소속부서명</label>
+                    <input type="text" class="form-control" name = "user_dept_nm"  id="adduser_dept_nm" placeholder="사용자 소속 부서명을 입력해주세요(선택)">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback" ></span>
+                  </div>
+
+                  <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                    <label for="user_dept_charge">사용자 담당업무</label>
+                    <input type="text" class="form-control" name = "user_dept_charge"  id="adduser_dept_charge" placeholder="사용자 담당업무를 입력해주세요(선택)">
+                    <span class="glyphicon glyphicon-briefcase form-control-feedback" ></span>
+                  </div>
+
+                  <input type="hidden" id="adduser_grade" name="user_grade"></select>
+
+                  <!-- <input type="checkbox" id="addteixon_use" checked="checked"><label for="teixon_use" class="lb_check">아이디 저장</label> -->
+
+              </div>
+          </form>
+
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn_point" id="addbtnRegister" title='등록'>등록</button>
+          </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- //page script 끝 -->	
+
+
+
+
+<!-- footer -->
+{% include "common/footer_modal.html" %}
+
+
+<!-- Bootstrap 3.3.7 -->
+<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="/static/plugins/iCheck/icheck.min.js"></script>
+<!-- page script 시작 -->
+<script src="/static/js/did/login.js"></script>
+
+<script>
+  $(function () {
+
+     $("#user_id").focus();
+
+     $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+
+    var user_id = localStorage.getItem("user_id");
+    if(user_id != null){
+      $("#user_id").val(user_id);
+      $("#remember").parent().attr('aria-checked', true);
+      $("#remember").parent().addClass('checked');
+    }else{
+      $("#remember").parent().attr('aria-checked', false);
+      $("#remember").parent().removeClass('checked');
+    }
+  });
+</script>
+<!-- page script 끝 -->	
+
+</body>
+</html>
+

@@ -1,0 +1,281 @@
+<!-- contents.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>| 정사영상 관리  -  <span id="subtitle">현장 선택</span></h2>
+			</div>
+
+      <!-- SEARCH AREA CONTENTS-->
+			<div class="page_header contents" id="search_area_content" style="height: 90px;">
+				<div>	
+					<fieldset style="margin-bottom: 10px;">
+						<h4 style="display: inline-block;  min-width: 70px; text-align: center;">검색조건</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <select name="selSearchType" id="schType_content" style="width: 15%;">
+                <option value="cont_nm">제목</option>
+              </select>
+              <input type="text" style="width: 80%; margin-right: 2%; float: right;" name="searchText" id="schTxt_content" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+            </div>
+            <button type="button" class="btn_search" id="btnSearch_content" title='검색'>검색</button>
+					</fieldset>
+          <fieldset>
+						<h4 style="display: inline-block; min-width: 70px; text-align: center;">등록일</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <input type="text" name="search_start" id="search_start_content" class="input_data big" placeholder="시작날짜" style="width:23%; margin-right:2%;" readonly="true;"> ~
+              <input type="text" name="search_end" id="search_end_content" class="input_data big" placeholder="끝 날짜" style="width:23%; margin-left:2%; margin-right:2%;" readonly="true;">
+              <div style="display: flex; width: 40%; float: right; margin-right: 2%; justify-content: end;" id="search_status_content">
+                <h4 style="display: inline-block; min-width: 70px; text-align: center; margin-right: 4%; padding-top: 5px;">진행상태</h4>
+                <select name="selSearchType" id="schType_date_content" style="width: 63%;">
+                  <option value="all">전체</option>
+                  <option value="waiting">대기</option>
+                  <option value="upload">업로드</option>
+                  <option value="stop">중지</option>
+                  <option value="success">완료</option>
+                </select>
+              </div>
+            </div>
+						<button type="button" class="btn_refresh" id="btn_refresh_content" title='초기화'>초기화</button>
+					</fieldset>
+				</div>
+			</div>
+     
+      <!-- CONTENT LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;" id="content_list_div">
+        <table id="content_list" class="table responsive table-bordered table-striped"  width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;">선택</th>
+              <th style="padding-right:0px;">파일번호</th>
+              <th style="padding-right:0px;">썸네일</th>
+              <th style="padding-right:0px;">제목</th>
+              <th style="padding-right:0px;">촬영일</th>
+              <th style="padding-right:0px;">용량</th>
+              <th style="padding-right:0px;">등록일</th>
+              <th style="padding-right:0px;">진행상태</th>
+              <th style="padding-right:0px;">아이디</th>
+              <th style="padding-right:0px;">이름</th>
+              <th style="padding-right:0px;">명령</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <!-- 하단 버튼 -->
+      <div style="width: 100%; margin-right: 10px; position: relative; top: -40px; padding-left: 15px; padding-right: 15px; " id="bottom_btn">
+        <button type="button" style="float: left;" class="btn_point_delete" data-toggle="modal" id="btnDeletebtn" onclick="delete_seleted();" title='선택 삭제'>선택 삭제</button>
+        <button type="button" style="float: right;" class="btn_point_add" data-toggle="modal" id="btnInsertOpen" title='현장 등록'>정사영상 등록</button>
+      </div>
+      
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+	
+
+<div class="modal fade modal-center" data-backdrop="static" id="modalInsert">
+    <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+        <div class="modal-content modal-20size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">정사영상 등록</h4>
+                
+            </div>
+            <div class="modal-body" id="modal_area">
+              <!-- <div style="display: inline-block;">
+                <h5>잔여 포인트 : <span id="now_user_point">{{ current_user.user_point }}</span></h5>
+                <h5>사용 포인트 : <span id="now_cont_point">0</span></h5>
+              </div> -->
+              <div style="float: right; display: block; color: red; width: 100%;">
+                <h5 style="float: right; margin-right: 10px;">* 1 GB 당 1 point 차감됩니다.</h5>
+              </div>
+                <form class="form-horizontal" id="formContents" name="formContents">
+                  <!-- FILE SELECTER 들어가는 부분 -->
+                </form>
+                <input type="hidden" id="user_point" value={{ current_user.user_point }}>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn_point" id="btnDom"   title='파일추가'>파일추가</button>
+              <button type="button" class="btn btn_point" id="btnUpdate"   title='수정'>수정</button>
+              <button type="button" class="btn btn_point" id="btnRegister" title='등록'>등록</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- //page script 끝 -->	
+
+<!-- 포인트 팝업 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalPoint">
+  <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+      <div class="modal-content modal-20size">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                      onclick="$('#modalPoint').modal('hide');">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="PointmodalTitle">캐시 사용</h4>
+          </div>
+          <div class="modal-body" style="padding : 20px;">
+            <div id="changeVoucherView" class="gb-page-wrapper">
+              <div class="voucher-container">
+                
+                <div class="voucher">
+                  <div class="payment_title">캐시 사용</div> 
+                  <div class="point_box point_box-use">
+                    <div class="box-body">
+                      <div class="description" style="font-size: 17px;">내 캐시  :  <span style="color: #000dbd;"><span id="now_point">{{ current_user.user_point }}</span> P</span></div> 
+                    </div>
+                    <button type="button" style="width: 25%;" class="btn_login" id="btn_payment01">충전</button>	
+
+                  </div>
+                  <div class="point_box point_box-use">
+                    <div class="box-body">
+                      <div class="description" style="font-size: 17px;">총 업로드 용량  :  <span id="upload_file_size"></span> GB</div> 
+                    </div> 
+                  </div>
+                  <div class="point_box point_box-use">
+                    <div class="box-body">
+                      <div class="description" style="font-size: 17px;">
+                        사용 캐시  :  <span style="color: #000dbd;" id="upload_use_point">0 </span><span style="color: #000dbd;">P</span>
+                            (사용 후 잔여 캐시 : <span id="now_use_point">0</span> P)
+                      </div> 
+                    </div> 
+                  </div>
+                </div>
+              </div> 
+              
+              <div  class="notice-container">
+                <div  class="payment_title">* 캐시 과금표</div> 
+                <div  class="content_warning">
+                  <table class="table-scroll">
+                    <thead>
+                      <tr>
+                        <th>항목</th>
+                        <th>과금방식</th>
+                        <th>비고</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>정사영상 업로드</td>
+                        <td>파일 1GB 당 1P 캐시</td>
+                        <td>- 1GB 미만의 파일은 1GB로 계산(소수점은 모두 올림으로 계산함)<br/>- 여러 개의 영상을 동시에 올릴 경우 합산된 용량으로 계산</td>
+                      </tr>
+                      <tr>
+                        <td>주제도 검출</td><td>검출 면적 1 ha당 1p 캐시</td><td>- 1ha 미만의 면적은 1ha로 계산(소수점은 모두 올림으로 계산함)<br/>- 여러 개의 주제도를 동시에 검출할 경우 합산된 면적으로 계산</td>
+                      </tr>
+                    </tbody>
+                    
+                  </table>
+                </div>
+              
+                <div  class="content_warning" style="margin-top: 15px;  font-size: 16px;">※ 업로드 및 검출 진행중에 이용자가 직접 중단할 경우 이미 차감된 캐시는 반환하지 않습니다.</div>
+              </div> 
+
+              <div style="text-align: center;">
+                <div style="margin-top: 30px; font-weight: 800; font-size: 18px;">위 주문 내용을 확인하였으며, 동의 후 사용합니다.</div>
+              </div>
+              <div style="text-align: center;">
+                <button type="button" style="margin-top: 20px; margin-right : 20px; width: 25%; background-color: #999;" class="btn_login" id="btn_point_cancle" onclick="$('#modalPoint').modal('hide');">취 소</button>	
+                <button type="button" style="margin-top: 20px; width: 25%;" class="btn_login" id="btn_point">사 용</button>	
+              </div>
+            </div> 
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
+<!-- 결제 팝업 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalPayment">
+  <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+      <div class="modal-content modal-20size">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                      onclick="close_payment('content');">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modalTitle"></h4>
+          </div>
+          <div class="modal-body" style="padding : 20px;">
+            <div id="changeVoucherView" class="gb-page-wrapper">
+              <div class="voucher-container">
+                
+                <div class="voucher">
+                  <div class="payment_title">포인트 충전</div> 
+                  <div class="payment_box payment_box-use">
+                    <div class="box-body">
+                      <!-- <div style="font-size: 17px; margin-bottom: 5px;">(주)테이슨</div> -->
+                      <!-- <div class="description" style="font-size: 17px;">결제 상품 : Ai-Fields 이용 캐시 100P</div>  -->
+                      <div class="description" style="margin-bottom: 15px; font-size: 17px;">• 결제 상품  :  Ai-Fields 이용 캐시 100P</div> 
+                      <div class="description" style="margin-bottom: 15px; font-size: 17px;">• 결제 금액  :  <span style="color: #000dbd;">10,000원</span> (VAT 포함)</div> 
+                      <div class="description" style="font-size: 17px;">• 결제 수단  :  신용카드 (현재 신용카드만 결제 가능)</div> 
+                    </div> 
+                    <!-- <span><span class="price">10,000원</span> 
+                    <div style="font-size: 13px; margin-top: 2px; text-align: end;">(부가세포함)</div> -->
+                    </span>
+                  </div>
+                </div>
+              </div> 
+    
+              <!-- 결제에 이용 -->
+              <input type="hidden" id="current_user_id" value={{ current_user.user_id }}>
+              <input type="hidden" id="current_user_nm" value={{ current_user.user_nm }}>
+              <input type="hidden" id="current_user_phone" value={{ current_user.user_phone }}>
+    
+              
+              <div  class="notice-container">
+                <div  class="payment_title">환불/취소안내</div> 
+                <div  class="content_warning">
+                  <div style="margin-bottom: 15px;">• 포인트 충전 후 7일 내에 청약 철회 시 전자상거래법에 따라 충전 금액이 환급됩니다.</div>
+                  <div style="margin-bottom: 15px;">• 충전 포인트의 취소 및 환급 시, 환급 수수료 10%가 부과될 수 있습니다. </div>
+                  <div style="margin-bottom: 15px;">• 충전 포인트의 <span style="font-weight: 800; font-size: 15px;"><U>유효기간은 5년</U></span>입니다. </div>
+                </div>
+                <div  class="payment_title" style="margin-top: 30px;">거래정보 제공동의(결제대행)</div> 
+                <div  class="content_warning">
+                  • (주)아임포트, (주)다날
+                </div>
+              </div> 
+
+              <div style="text-align: center;">
+                <div style="margin-top: 30px; font-weight: 800; font-size: 18px;">위 주문 내용을 확인하였으며, 정보 제공 등에 동의 후 결제합니다.</div>
+              </div>
+              <div style="text-align: center;">
+                <button type="button" style="margin-top: 30px; margin-right : 20px; width: 25%; background-color: #999;" class="btn_login" id="btn_cancle" onclick="close_payment('content');">취 소</button>	
+                <button type="button" style="margin-top: 30px; width: 25%;" class="btn_login" id="btn_payment">결 제</button>	
+              </div>
+            </div> 
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- page script -->
+<script src="/static/js/admin/content_cont_admin.js"></script>
+<script src="/static/js/did/paymodule.js"></script>
+</body>
+</html>

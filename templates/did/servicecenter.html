@@ -1,0 +1,82 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none" style="overflow-x: hidden;">
+			<div class="page_tit">
+				<h2>| 고객센터  <span id="subtitle"></span></h2>
+			</div>
+
+      <!-- 고객센터 등록 - 고객센터 LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;" id="insert_list_div">
+        <form name = "service_insert" id = "service_insert">
+        <div class="box-body" id="service_insert_div" style="margin-top: 30px; padding : 15px;">
+          <!-- <h4 style="margin: 10px;">정사영상 목록 - 검출 대상 선택</h4> -->
+          <table id="themamap_insert_list" class="table"  width="100%">
+            <tbody>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2"><h3>문의 유형</h3></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2">
+                    <input type="radio" id="type1" name="service_type" style="margin: 0px 5px 0px 5px;"><label for="type1" style="font-size: 17px;">이용불편 및 개선</label>
+                    <input type="radio" id="type2" name="service_type" style="margin: 0px 5px 0px 5px;"><label for="type2" style="font-size: 17px;">환불 및 요금정책</label>
+                    <input type="radio" id="type3" name="service_type" style="margin: 0px 5px 0px 5px;"><label for="type3" style="font-size: 17px;">기타</label>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;"><h3>이름</h3></td>
+                <td style="vertical-align: middle; border : 0px;"><h3>E-Mail</h3></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;"><input type="text" name="user_name" id="user_name"></td>
+                <td style="vertical-align: middle; border : 0px;"><input type="text" name="user_email" id="user_email"></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2"><h3>제목</h3></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2"><input type="text" name="email_title" id="email_title" style="width: 100%;"></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2"><h3>내용</h3></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2"><textarea style="height: 300px; width:100%; border: 1px solid #ddd; padding: 13px 13px;" name="email_text" id="email_text" ></textarea></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2">
+                  <input type="radio" id="service_agree" style="margin: 0px 5px 0px 5px;"><label for="service_agree" style="font-size: 17px;">개인 정보 보호 정책을 읽었으며 이에 동의합니다.</label>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle; border : 0px;" colspan="2">
+                  <button type="button" style="display: inline-block; width: 150px; float: left; margin-top: 4px;" class="btn_login" id="btn_sendemail">보내기</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <input type="hidden" id="selected_id" name="cont_id">
+        </form>
+      </div>
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+<!-- page script -->
+<script src="/static/js/did/servicecenter.js"></script>
+
+</body>
+</html>

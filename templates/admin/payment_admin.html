@@ -1,0 +1,186 @@
+<!-- payment.html -->
+{% include "common/header.html" %}
+    
+
+  
+
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>캐시 관리</h2>
+			</div>
+
+      <!-- SEARCH AREA -->
+			<div class="page_header user" style="height: 90px;">
+				
+				<!-- <div style="text-align: center;">	 -->
+				<div>	
+					<fieldset style="margin-bottom: 10px;">
+						<h4 style="display: inline-block;  min-width: 70px; text-align: center;">검색조건</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <select name="selSearchType" id="schType" style="width: 15%;">
+                <option value="payment_nm">이름</option>
+                <option value="payment_id">아이디</option>
+                <!-- <option value="workspace_location">등급</option> -->
+              </select>
+              <input type="text" style="width: 80%;" name="searchText" id="schTxt" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+            </div>
+            <button type="button" class="btn_search" id="btnSearch" title='검색'>검색</button>
+					</fieldset>
+          <fieldset>
+						<h4 style="display: inline-block; min-width: 70px; text-align: center;">등록일</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <input type="text" name="search_start" id="search_start" class="input_data big" placeholder="시작날짜" style="width:25%; margin-right:4%;" readonly="true;"> ~
+              <input type="text" name="search_end" id="search_end" class="input_data big" placeholder="끝 날짜" style="width:25%; margin-left:4%; margin-right:4%;" readonly="true;">
+            </div>
+						<button type="button" class="btn_refresh" id="btnRefresh" title='초기화'>초기화</button>
+					</fieldset>
+				</div>
+			</div>
+
+			
+      <!--LIST 시작 data-table-->
+      
+      <div style="padding: 20px; min-width: 600px;">
+        <div style="width: 350px; height: 80px; border: black 1px solid; padding:10px; vertical-align: middle; margin-bottom: 50px;">
+          <h4 style="display: inline-block; margin-top: 20px; ">내 캐시 : {{ current_user.user_point }} P</h4>
+          <button type="button" style="display: inline-block; width: 100px; float: right; margin-top: 4px;" class="btn_login" id="btn_payment01">결제하기</button>	
+        </div>
+
+        <div>
+          <div style="margin-top: 10px;">
+            <button type="button" class="payment_cash active" id="payment_cash">충전</button> | <button type="button" class="payment_cash" id="use_point">사용</button>
+          </div>
+          
+           <!--LIST 시작 data-table-->
+          <div class="box-body" style="overflow: hidden;" id="payment_list_div">
+            <table id="payment_list" class="table responsive table-bordered table-striped"  width="100%">
+              <thead>
+                <tr>
+                  <th style="padding-right:0px;">일시</th>
+                  <th style="padding-right:0px;">아이디</th>
+                  <th style="padding-right:0px;">이름</th>
+                  <th style="padding-right:0px;">내역</th>
+                  <th style="padding-right:0px;">결제금액<br/>(취소금액)</th>
+                  <th style="padding-right:0px;">충전캐시<br/>(취소캐시)</th>
+                  <th style="padding-right:0px;">결제취소</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+          <!--LIST 시작 data-table-->
+          <div class="box-body" style="overflow: hidden; display: none;" id="point_list_div">
+            <table id="point_list" class="table responsive table-bordered table-striped"  width="100%">
+              <thead>
+                <tr>
+                  <th style="padding-right:0px;">일시</th>
+                  <th style="padding-right:0px;">아이디</th>
+                  <th style="padding-right:0px;">이름</th>
+                  <th style="padding-right:0px;">내역</th>
+                  <th style="padding-right:0px;">사용내역</th>
+                  <th style="padding-right:0px;">사용캐시</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+        </div>
+
+      </div> 
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+	
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+
+
+<!-- 결제 팝업 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalPayment">
+  <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+      <div class="modal-content modal-20size">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                      onclick="closePopup();">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modalTitle"></h4>
+          </div>
+          <div class="modal-body" style="padding : 20px;">
+            <div id="changeVoucherView" class="gb-page-wrapper">
+              <div class="voucher-container">
+                
+                <div class="voucher">
+                  <div class="payment_title">포인트 충전</div> 
+                  <div class="payment_box payment_box-use">
+                    <div class="box-body">
+                      <!-- <div style="font-size: 17px; margin-bottom: 5px;">(주)테이슨</div> -->
+                      <!-- <div class="description" style="font-size: 17px;">결제 상품 : Ai-Fields 이용 캐시 100P</div>  -->
+                      <div class="description" style="margin-bottom: 15px; font-size: 17px;">• 결제 상품  :  Ai-Fields 이용 캐시 100P</div> 
+                      <div class="description" style="margin-bottom: 15px; font-size: 17px;">• 결제 금액  :  <span style="color: #000dbd;">10,000원</span> (VAT 포함)</div> 
+                      <div class="description" style="font-size: 17px;">• 결제 수단  :  신용카드 (현재 신용카드만 결제 가능)</div> 
+                    </div> 
+                    <!-- <span><span class="price">10,000원</span> 
+                    <div style="font-size: 13px; margin-top: 2px; text-align: end;">(부가세포함)</div> -->
+                    </span>
+                  </div>
+                </div>
+              </div> 
+    
+              <!-- 결제에 이용 -->
+              <input type="hidden" id="current_user_id" value={{ current_user.user_id }}>
+              <input type="hidden" id="current_user_nm" value={{ current_user.user_nm }}>
+              <input type="hidden" id="current_user_phone" value={{ current_user.user_phone }}>
+              <input type="hidden" id="current_user_grade" value={{ current_user.user_grade }}>
+    
+              
+              <div  class="notice-container">
+                <div  class="payment_title">환불/취소안내</div> 
+                <div  class="content_warning">
+                  <div style="margin-bottom: 15px;">• 포인트 충전 후 7일 내에 청약 철회 시 전자상거래법에 따라 충전 금액이 환급됩니다.</div>
+                  <div style="margin-bottom: 15px;">• 충전 포인트의 취소 및 환급 시, 환급 수수료 10%가 부과될 수 있습니다. </div>
+                  <div style="margin-bottom: 15px;">• 충전 포인트의 <span style="font-weight: 800; font-size: 15px;"><U>유효기간은 5년</U></span>입니다. </div>
+                </div>
+                <div  class="payment_title" style="margin-top: 30px;">거래정보 제공동의(결제대행)</div> 
+                <div  class="content_warning">
+                  • (주)아임포트, (주)다날
+                </div>
+              </div> 
+
+              <div style="text-align: center;">
+                <div style="margin-top: 30px; font-weight: 800; font-size: 18px;">위 주문 내용을 확인하였으며, 정보 제공 등에 동의 후 결제합니다.</div>
+              </div>
+              <div style="text-align: center;">
+                <button type="button" style="margin-top: 30px; margin-right : 20px; width: 25%; background-color: #999;" class="btn_login" id="btn_cancle" onclick="$('#modalPayment').modal('hide');">취 소</button>	
+                <button type="button" style="margin-top: 30px; width: 25%;" class="btn_login" id="btn_payment">결 제</button>	
+              </div>
+            </div> 
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- page script -->
+<script src="/static/js/admin/payment_admin.js"></script>
+<script src="/static/js/did/paymodule.js"></script>
+
+
+</body>
+</html>
+
+
+    

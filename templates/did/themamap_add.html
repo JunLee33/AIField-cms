@@ -1,0 +1,121 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none" style="overflow-x: hidden;">
+			<div class="page_tit">
+				<h2>| 주제도 관리  -  <span id="subtitle">검출 등록</span></h2>
+			</div>
+
+      <!-- 주제도 검출 등록 - 정사영상 LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;" id="insert_list_div">
+        <form name = "themamap_insert" id = "themamap_insert">
+        <div class="box-body" id="themamap_insert_div">
+          <!-- <h4 style="margin: 10px;">정사영상 목록 - 검출 대상 선택</h4> -->
+          <table id="themamap_insert_list" class="table responsive table-bordered table-striped"  width="100%">
+            <tbody>
+              <tr>
+                <td style="vertical-align: middle;">현장명</td>
+                <td style="vertical-align: middle;"><span id="workspace_name"></span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">검출 제목</td>
+                <td style="vertical-align: middle;"><input type="text" name="themamap_nm" id="themamap_nm"></td>
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">검출종류<br>(AI 검출모델 선택)</td>
+                <td style="vertical-align: middle;"><input type="radio" id="car_model" name="detection_type" style="margin: 0px 5px 0px 5px;"><label for="car_model">차량변화</label>
+                    <input type="radio" id="building_model" name="detection_type" style="margin: 0px 5px 0px 5px;"><label for="building_model">건물상부 변화</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <input type="hidden" id="selected_id" name="cont_id">
+        </form>
+      </div>
+
+      
+        <div class="box-body" style="overflow: hidden;" id="content_list_div">
+            <h4 style="margin: 10px;">정사영상 목록 - 검출 대상 선택</h4>
+            <table id="content_list" class="table responsive table-bordered table-striped"  width="100%">
+              <thead>
+                <tr>
+                  <th style="padding-right:0px;">선택</th>
+                  <th style="padding-right:0px;">영상번호</th>
+                  <th style="padding-right:0px;">제목</th>
+                  <th style="padding-right:0px;">촬영일</th>
+                  <th style="padding-right:0px;">용량</th>
+                  <th style="padding-right:0px;">등록일</th>
+                </tr>
+              </thead>
+            </table>
+        </div>
+
+        <div class="box-body" style="overflow: hidden;" id="selected_list_div">
+          <h4 style="margin: 10px;">선택된 목록 (총 <span id="selected_cnt">0</span>개)</h4>
+          <table id="selected_list" class="table responsive table-bordered table-striped"  width="100%">
+            <thead>
+              <tr>
+                <th style="padding-right:0px;">선택</th>
+                <th style="padding-right:0px;">영상번호</th>
+                <th style="padding-right:0px;">제목</th>
+                <th style="padding-right:0px;">촬영일</th>
+                <th style="padding-right:0px;">용량</th>
+                <th style="padding-right:0px;">등록일</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div style="width: 100%; text-align: center; margin: 10px; position: relative; padding-left: 15px; padding-right: 15px;" id="select_bottom_btn">
+          <button type="button" class="btn_point_add" style="margin:10px; padding-left: 0px; background-image: none;" data-toggle="modal" id="btn_detection" title='검출 실행'>검출 실행</button>
+          <button type="button" class="btn_point_add" style="margin:10px; padding-left: 0px; background-image: none;" data-toggle="modal" id="btn_cancel" title='취소'>취소</button>
+        </div>
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+
+<div class="modal fade modal-center" data-backdrop="static" id="modalInsert">
+    <div class="modal-dialog modal-50size modal-center" style="top:0%;">
+        <div class="modal-content modal-20size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">정사영상 등록</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="formUser" name="formUser">
+                  <!-- FILE SELECTER 들어가는 부분 -->
+                </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn_point" id="btnDom"   title='수정'>파일추가</button>
+              <button type="button" class="btn btn_point" id="btnUpdate"   title='수정'>수정</button>
+              <button type="button" class="btn btn_point" id="btnRegister" title='등록'>등록</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- //page script 끝 -->
+
+<!-- page script -->
+<script src="/static/js/did/themamap_add.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>사용자</h2>
+			</div>
+			<div class="page_header user">
+				<div class="btn_wrap">
+					<button type="button" class="btn_point_add" data-toggle="modal" id="btnInsertOpen" title='사용자 추가'>사용자 추가</button>
+				</div>	
+				<div class="search_stick" id="search_area">	
+					<fieldset>
+						<legend>검색하기</legend>  						
+						<select name="selSearchType" id="schType">
+							<option value="user_nm">이름</option>
+							<option value="user_id">아이디</option>
+							<!-- <option value="user_grade">등급</option> -->
+						</select>
+						<input type="text" name="searchText" id="schTxt" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+						<button type="button" class="btn_search" id="btnSearch" title='검색'>검색</button>
+					</fieldset>
+				</div>
+			</div>
+      <!--LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;">
+        <table id="data_list" class="table responsive table-bordered table-striped"  width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;">순번</th>
+              <th style="padding-right:0px;">이름</th>
+              <th style="padding-right:0px;">아이디</th>
+              <th style="padding-right:0px;">등급</th>
+              <th style="padding-right:0px;">회사명</th>
+              <th style="padding-right:0px;">부서명</th>
+              <th style="padding-right:0px;">잔여포인트</th>
+              <th style="padding-right:0px;">사용유무</th>
+              <th style="padding-right:0px;">상세보기</th>
+            </tr>
+          </thead>
+        </table>
+      </div>				
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+	
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+
+<div class="modal fade modal-center" data-backdrop="static" id="modalInsert">
+    <div class="modal-dialog modal-30size modal-center" style="top:0%;">
+        <div class="modal-content modal-30size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose" title='닫기'
+                        onclick="closePopup();">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">사용자 등록</h4>
+            </div>
+            <div class="modal-body">
+
+                
+              <form class="form-horizontal" id="formUser" name="formUser">
+                <div class="box-body" style="padding : 10px">
+                 
+                  <div style="width: 100%;">
+                    <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_nm">이름 *</label>
+                      <input type="text" class="form-control" name = "user_nm"  id="user_nm" placeholder="이름을 입력해주세요">
+                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                  
+                    <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_id" class="col-md-6">아이디 *</label>
+                      <button type="button" class="btn_point col-md-6" style=" margin-bottom: 5px; float:right;" id="duplicate_check" checking="N" title='아이디 중복체크'>중복체크</button>
+                      <input type="text" class="form-control" name = "user_id"  id="user_id" placeholder="이메일을 입력해주세요">
+                      <span class="glyphicon glyphicon-tag form-control-feedback"></span>
+                    </div>
+                  </div>
+                  
+                  <div style="width: 100%;">
+                    <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_pwd">비밀번호 *</label>
+                      <input type="password" class="form-control" name = "user_pwd"  id="user_pwd" placeholder="(숫자,영문,특문)포함 8자 이상">
+                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_conf_pwd">비밀번호 확인 *</label>
+                      <input type="password" class="form-control" name = "user_conf_pwd"  id="user_conf_pwd" placeholder="비밀번호를 다시 입력하세요">
+                      <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                  </div>
+
+                  <div style="width: 100%;">
+                    <div class="form-group has-feedback" style="margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_phone">핸드폰 번호 *</label>
+                      <input type="text" class="form-control" name = "user_phone"  id="user_phone" placeholder="핸드폰 번호를 입력해주세요">
+                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                  
+                    <div class="form-group has-feedback" style="float : right; margin-left: 0%; margin-right: 0px; display: inline-block; width: 48%;">
+                      <label for="user_birth" class="col-md-6">생년월일 *</label>
+                      <input type="text" name="user_birth" id="user_birth" class="form-control" placeholder="생년월일" readonly="true;">
+                      <span class="glyphicon glyphicon-tag form-control-feedback"></span>
+                    </div>
+                  </div>
+           
+                    <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                      <label for="user_office">사용자 소속회사명</label>
+                      <input type="text" class="form-control" name = "user_office"  id="user_office" placeholder="사용자 소속 회사명을 입력해주세요(선택)">
+                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                      <label for="user_dept_nm">사용자 소속부서명</label>
+                      <input type="text" class="form-control" name = "user_dept_nm"  id="user_dept_nm" placeholder="사용자 소속 부서명을 입력해주세요(선택)">
+                      <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                      <label for="user_dept_charge">사용자 담당업무</label>
+                      <input type="text" class="form-control" name = "user_dept_charge"  id="user_dept_charge" placeholder="사용자 담당업무를 입력해주세요(선택)">
+                      <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback" style=" margin-left: 0px; margin-right: 0px;">
+                      <label for="user_dept_charge">사용자 등급</label>
+                      <select class="form-control" id="user_grade" name="user_grade"></select>
+                      <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn_default pull-left"  id="btnDelete" title='탈퇴'><span class="out_title">삭제</span></button>
+                <button type="button" class="btn btn_point" id="btnRegister" title='등록'>등록</button>
+                <button type="button" class="btn btn_point" id="btnUpdate" title='수정'>수정</button>
+            </div>
+        </div>
+        <!-- <input type="hidden" id="current_user_grade" value={{ current_user.user_grade }}> -->
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- //page script 끝 -->	
+
+
+<!-- 탈퇴 -->
+<div class="modal fade modal-center" data-backdrop="static" id="modalout" style="display: hide;">
+  <div class="modal-dialog modal-20size modal-center" style="width:40%">
+      <div class="modal-content modal-20size">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnClose1" title='닫기'
+                      onclick="$('#modalout').modal('hide');">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modalTitle">회원<span class="out_title">삭제</span></h4>
+          </div>
+          <div class="modal-body">
+            <div  class="notice-container">
+              <div  class="payment_title"><span class="out_title">삭제</span> 안내</span></div> 
+              <div  class="content_warning" style="margin-top: 15px;  font-size: 16px;">※ 아래 내용을 꼭 확인 후 동의해주세요.</div>
+            </div> 
+            <div  class="notice-container" style="padding-top: 10px; padding-left: 10px;">
+              <div  class="content_warning" style="margin-top: 15px;  font-size: 16px;">
+                - <span class="out_title">삭제</span> 시 <span id="out_id" style="font-weight: bold;">사용중인 아이디</span>는 <B>삭제되어 재 가입 및 복구가 불가합니다.</B>
+              </div>
+              <div  class="content_warning" style="margin-top: 15px;  font-size: 16px;">
+                - <span class="out_title">삭제</span> 시 현재 <B>잔여 포인트, 업로드 데이터</B>는 모두 삭제 되며, 어떠한 경우라도 복구가 불가능 합니다.
+              </div>
+              <div  class="content_warning" style="margin-top: 15px;  font-size: 16px;">
+                - 자세한 내용은 이용약관을 꼭 확인해 주시기 바랍니다.
+              </div>
+            </div> 
+
+            <div  class="notice-container" style="padding-top: 10px;">
+              
+
+              <div  class="content_warning" style="margin-top: 50px;  font-size: 16px;">
+                <input type="checkbox" id="isout" name="isout" style="opacity: 1; display: inline-block; position: relative; z-index: 1; vertical-align: middle; margin: 0;">
+                <label for="isout"></label>
+                위 안내 사항을 모두 확인하였으며, 그럼에도 불구하고 <span class="out_title">삭제</span>에 동의합니다.
+              </div>
+            </div>
+
+            <div style="text-align: center;">
+              <button type="button" style="margin-top: 20px; margin-right : 20px; width: 25%; background-color: #999;" class="btn_login" id="btn_point_cancle" onclick="$('#modalout').modal('hide');">취 소</button>	
+              <button type="button" style="margin-top: 20px; width: 25%;" class="btn_login" id="btn_out">회원<span class="out_title">삭제</span></button>	
+            </div>
+          </div>
+          <div class="modal-footer" id="button_set">
+          </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- page script -->
+<script src="/static/js/did/user.js"></script>
+<script src="/static/js/common/common.js"></script>
+
+</body>
+</html>
+

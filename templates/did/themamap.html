@@ -1,0 +1,70 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none">
+			<div class="page_tit">
+				<h2>| 주제도 관리  -  <span id="subtitle">현장 선택</span></h2>
+			</div>
+
+      <!-- SEARCH AREA -->
+			<div class="page_header contents" id="search_area" style="height: 90px;">
+				<!-- <div style="text-align: center;">	 -->
+				<div>	
+					<fieldset style="margin-bottom: 10px;">
+						<h4 style="display: inline-block;  min-width: 70px; text-align: center;">검색조건</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <select name="selSearchType" id="schType" style="width: 15%;">
+                <option value="workspace_nm">현장명</option>
+              </select>
+              <input type="text" style="width: 80%; margin-right: 2%; float: right;" name="searchText" id="schTxt" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+            </div>
+            <button type="button" class="btn_search" id="btnSearch" title='검색'>검색</button>
+					</fieldset>
+          <fieldset>
+						<h4 style="display: inline-block; min-width: 70px; text-align: center;">등록일</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <input type="text" name="search_start" id="search_start" class="input_data big" placeholder="시작날짜" style="width:23%; margin-right:2%;" readonly="true;"> ~
+              <input type="text" name="search_end" id="search_end" class="input_data big" placeholder="끝 날짜" style="width:23%; margin-left:2%; margin-right:2%;" readonly="true;">
+            </div>
+						<button type="button" class="btn_refresh" id="btnRefresh" title='초기화'>초기화</button>
+					</fieldset>
+				</div>
+			</div>
+      
+      <!--WORKSPACE LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;" id="workspace_list_div">
+        <table id="workspace_list" class="table responsive table-bordered table-striped"  width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;">현장번호</th>
+              <th style="padding-right:0px;">현장명</th>
+              <th style="padding-right:0px;">설명</th>
+              <th style="padding-right:0px;">검출완료</th>
+              <th style="padding-right:0px;">검출중</th>
+              <th style="padding-right:0px;">관리</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+     
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+<!-- page script -->
+<script src="/static/js/did/themamap.js"></script>
+
+</body>
+</html>
+

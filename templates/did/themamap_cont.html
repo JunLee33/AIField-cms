@@ -1,0 +1,89 @@
+<!-- User.html -->
+{% include "common/header.html" %}
+    
+  <!-- container 시작 -->
+  <div id="container">
+    <!-- content 시작 -->
+    <section id="content" class="aside_none" style="overflow-x: hidden;">
+			<div class="page_tit">
+				<h2>| 주제도 관리  -  <span id="subtitle">현장 선택</span></h2>
+			</div>
+
+      <!-- SEARCH AREA -->
+			<div class="page_header contents" id="search_area" style="height: 90px;">
+				<!-- <div style="text-align: center;">	 -->
+				<div>	
+					<fieldset style="margin-bottom: 10px;">
+						<h4 style="display: inline-block;  min-width: 70px; text-align: center;">검색조건</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <select name="selSearchType" id="schType" style="width: 15%;">
+                <option value="themamap_nm">제목</option>
+              </select>
+              <input type="text" style="width: 80%; margin-right: 2%; float: right;" name="searchText" id="schTxt" placeholder="검색어" onkeypress="if(event.keyCode == 13) $('#btnSearch').click();">
+            </div>
+            <button type="button" class="btn_search" id="btnSearch" title='검색'>검색</button>
+					</fieldset>
+          <fieldset>
+						<h4 style="display: inline-block; min-width: 70px; text-align: center;">등록일</h4>
+            <div style="display: inline-block; width: 40%; text-align: left;">
+              <input type="text" name="search_start" id="search_start" class="input_data big" placeholder="시작날짜" style="width:23%; margin-right:2%;" readonly="true;"> ~
+              <input type="text" name="search_end" id="search_end" class="input_data big" placeholder="끝 날짜" style="width:23%; margin-left:2%; margin-right:2%;" readonly="true;">
+              <div style="display: flex; width: 40%; float: right; margin-right: 2%; justify-content: end;" id="search_status">
+                <h4 style="display: inline-block; min-width: 70px; text-align: center; margin-right: 4%; padding-top: 5px;">진행상태</h4>
+                <select name="selSearchType_status" id="schType_status" style="width: 63%;">
+                  <option value="all">전체</option>
+                  <option value="waiting">대기</option>
+                  <option value="upload">업로드</option>
+                  <option value="stop">중지</option>
+                  <option value="success">검출완료</option>
+                </select>
+              </div>
+            </div>
+						<button type="button" class="btn_refresh" id="btnRefresh" title='검색'>검색</button>
+					</fieldset>
+				</div>
+			</div>
+      
+
+      <!-- themamap LIST 시작 data-table-->
+      <div class="box-body" style="overflow: hidden;" id="themamap_list_div">
+        <table id="themamap_list" class="table responsive table-bordered table-striped"  width="100%">
+          <thead>
+            <tr>
+              <th style="padding-right:0px;">선택</th>
+              <th style="padding-right:0px;">주제도번호</th>
+              <th style="padding-right:0px;">검출종류</th>
+              <th style="padding-right:0px;">제목</th>
+              <th style="padding-right:0px;">검출일</th>
+              <th style="padding-right:0px;">진행상태</th>
+              <th style="padding-right:0px;">명령</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <!-- 하단 버튼 -->
+      <div style="width: 100%; margin-right: 10px; position: relative; top: -40px; padding-left: 15px; padding-right: 15px; " id="bottom_btn">
+        <button type="button" style="float: left;" class="btn_point_delete" data-toggle="modal" id="btnDeletebtn" onclick="delete_seleted();">선택 삭제</button>
+        <button type="button" style="float: right;" class="btn_point_add" data-toggle="modal" id="btnInsertOpen" title='주제도 등록'>주제도 등록</button>
+      </div>
+    </section>
+    <!-- //content 끝 -->
+  </div>
+  <!-- //container 끝 -->    
+</div>
+<!-- //wrap 끝 -->
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+<!-- //page script 끝 -->
+
+<!-- page script -->
+<script src="/static/js/did/themamap_cont.js"></script>
+
+</body>
+</html>

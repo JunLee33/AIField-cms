@@ -1,0 +1,107 @@
+<!-- dashboard.html -->
+{% include "common/header.html" %}
+<style>
+	body, html{
+		min-height: 1300px !important;
+	}
+</style>
+    <!-- container 시작 -->
+    <div id="container">
+		  
+        <!-- content 시작 -->
+			<div class="page_tit setting">
+				<h2>| 대시보드</h2>
+			</div>
+			<div class="box-body" style="overflow: hidden; margin: 30px;">
+				<table id="dashboard_list" class="table responsive table-bordered table-striped"  width="100%">
+				  <thead>
+					<tr>
+					  <th style="padding-right:0px;">등록 현장수</th>
+					  <th style="padding-right:0px;">등록 영상 갯수</th>
+					  <th style="padding-right:0px;">총 용량</th>
+					  <th style="padding-right:0px;">검출 주제도</th>
+					  <th style="padding-right:0px;">현 잔여포인트</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td style="padding-right:0px;" id="total_workspace"></td>
+					  <td style="padding-right:0px;" id="total_content"></td>
+					  <td style="padding-right:0px;" id="total_disk"></td>
+					  <td style="padding-right:0px;" id="total_themamap"></td>
+					  <td style="padding-right:0px;" id="total_point">{{ current_user.user_point }}</td>
+					</tr>
+				  </tbody>
+				</table>
+			</div>
+
+			<div class="box-body" style="overflow: hidden; margin: 30px;">
+				<h4 style="margin: 10px;">최근 7일간 주제도 검출내역</h4>
+				<table id="themamap_D7_list" class="table responsive table-bordered table-striped"  width="100%">
+				  <thead>
+					<tr>
+					  <th style="padding-right:0px;">검출일</th>
+					  <th style="padding-right:0px;">주제도번호</th>
+					  <th style="padding-right:0px;">검출종류</th>
+					  <th style="padding-right:0px;">제목</th>
+					  <th style="padding-right:0px;">진행상태</th>
+					  <th style="padding-right:0px;">현장명</th>
+					</tr>
+				  </thead>
+				</table>
+			</div>
+
+			<div class="box-body" style="overflow: hidden; margin: 30px;">
+				<h4 style="margin: 10px;">최근 7일간 정사영상 등록내역</h4>
+				<table id="contents_D7_list" class="table responsive table-bordered table-striped"  width="100%">
+				  <thead>
+					<tr>
+						<th style="padding-right:0px;">등록일</th>
+						<th style="padding-right:0px;">파일번호</th>
+						<th style="padding-right:0px;">제목</th>
+						<th style="padding-right:0px;">촬영일</th>
+						<th style="padding-right:0px;">용량</th>
+						<th style="padding-right:0px;">진행상태</th>
+						<th style="padding-right:0px;">현장명</th>
+					</tr>
+				  </thead>
+				</table>
+			</div>
+
+			<div class="box-body" style="overflow: hidden; margin: 30px;">
+				<h4 style="margin: 10px;">최근 7일간 등록한 현장</h4>
+				<table id="workspace_D7_list" class="table responsive table-bordered table-striped"  width="100%">
+				  <thead>
+					<tr>
+					  <th style="padding-right:0px;">현장번호</th>
+					  <th style="padding-right:0px;">현장명</th>
+					  <th style="padding-right:0px;">설명</th>
+					  <th style="padding-right:0px;">등록일</th>
+					</tr>
+				  </thead>
+				</table>
+			</div>
+
+        <!-- //content 끝 -->
+
+    </div>
+    <!-- //container 끝 -->    
+</div>
+
+<!-- wrap 시작 -->
+<div class="wrap-loading display-none">
+	<div><img src="/static/images/loading.gif"  width=70px; height=70px;/></div>
+</div>
+
+<footer id="footer">
+	<div class="footer_inner" style="text-align: center;">
+		<p class="footer_copy">Copyright © TEIXON Co. Ltd 2021. All Rights Reserved.</p>
+	</div>		
+</footer>
+
+<!-- page script -->
+<script src="/static/js/did/dashboard.js"></script>
+
+</body>
+</html>
+
